@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
+import NavigateLeftIcon from "../NavigateLeftIcon";
+import NavigateRightIcon from "../NavigateRightIcon";
 import classes from "./slider.module.scss";
 const Slider = ({ data, activeItemId, setActiveItemId }) => {
   const sliderRef = useRef();
@@ -37,7 +39,7 @@ const Slider = ({ data, activeItemId, setActiveItemId }) => {
 
     let scrollToValue = sliderRef.current.scrollLeft - imageWidth;
 
-    scrollToValue = Math.ceil(scrollToValue / imageWidth) * imageWidth;
+    scrollToValue = Math.floor(scrollToValue / imageWidth) * imageWidth;
 
     if (scrollToValue < 0) {
       scrollByValue.current((data.length - 1) * imageWidth);
@@ -64,13 +66,7 @@ const Slider = ({ data, activeItemId, setActiveItemId }) => {
   return (
     <>
       <div style={{ display: "flex", alignItems: "center" }}>
-        <div
-          style={{ fontSize: "50px", marginRight: "100px", cursor: "pointer" }}
-          onClick={scrollLeft}
-          className={classes["navigation-icon"]}
-        >
-          <i class="fa-solid fa-circle-chevron-left"></i>
-        </div>
+        <NavigateLeftIcon onClick={scrollLeft} />
         <div
           onTouchEnd={(e) => handleOnTocuhEnd(e)}
           onTouchStart={(e) => {
@@ -85,14 +81,7 @@ const Slider = ({ data, activeItemId, setActiveItemId }) => {
             </div>
           ))}
         </div>
-
-        <div
-          style={{ fontSize: "50px", marginLeft: "100px", cursor: "pointer" }}
-          onClick={scrollRight}
-          className={classes["navigation-icon"]}
-        >
-          <i className="fa-solid fa-circle-chevron-right"></i>
-        </div>
+        <NavigateRightIcon onClick={scrollRight} />
       </div>
     </>
   );
