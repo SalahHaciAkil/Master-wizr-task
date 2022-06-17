@@ -1,9 +1,22 @@
 import React from "react";
+import { useEffect } from "react";
+import { useRef } from "react";
 import classes from "./thumbnaiIcons.module.scss";
 const ThumbnaiIcons = ({ data, setActiveItemId, activeItemId }) => {
+  const listRef = useRef();
+  const imgRef = useRef();
+
+  useEffect(() => {
+    const activeItemIndex = data.findIndex((x) => x.id === activeItemId);
+    const imageWidth = +Number(
+      imgRef.current.getClientRects()[0].width
+    ).toFixed(0);
+    const scrollValue = activeItemIndex * imageWidth;
+    listRef.current.scrollLeft = scrollValue;
+  }, [activeItemId, data]);
   return (
     <>
-      <ul className={classes["thumbnails-list"]}>
+      <ul ref={listRef} className={classes["thumbnails-list"]}>
         {data.map((item) => (
           <li
             key={item.id}
@@ -21,7 +34,7 @@ const ThumbnaiIcons = ({ data, setActiveItemId, activeItemId }) => {
                 activeItemId === item.id && classes["active"]
               }`}
             >
-              <img src={item.thumbnailUrl} alt={item.title} /> {}
+              <img ref={imgRef} src={item.thumbnailUrl} alt={item.title} /> {}
             </div>
 
             <p style={{ fontSize: "20px" }}>{item.title.split(" ")[0]}</p>
