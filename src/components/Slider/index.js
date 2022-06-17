@@ -38,8 +38,7 @@ const Slider = ({ data, activeItemId, setActiveItemId }) => {
     ).toFixed(0);
 
     let scrollToValue = sliderRef.current.scrollLeft - imageWidth;
-
-    scrollToValue = Math.floor(scrollToValue / imageWidth) * imageWidth;
+    scrollToValue = Math.ceil(scrollToValue / imageWidth) * imageWidth;
 
     if (scrollToValue < 0) {
       scrollByValue.current((data.length - 1) * imageWidth);
