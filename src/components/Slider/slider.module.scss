@@ -1,0 +1,39 @@
+.slider-container {
+  width: 600px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  display: flex;
+  margin: 2rem 0px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &::scrollbar {
+    display: none;
+  }
+  .image-bx {
+    // width: 600px;
+    img {
+      width: 600px;
+      @media only screen and (max-width: 767px) {
+        width: 300px;
+      }
+      // width: 300px;
+      // width: 200px;
+      // width: 100%;
+      // height: auto;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    width: 300px;
+  }
+}
+
+.navigation-icon {
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+}

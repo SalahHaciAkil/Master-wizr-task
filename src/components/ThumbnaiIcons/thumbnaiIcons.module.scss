@@ -1,0 +1,36 @@
+.thumbnails-list {
+  display: flex;
+  gap: 10px;
+  height: 170px;
+
+  padding: 15px;
+  @media only screen and (max-width: 767px) {
+    overflow-x: scroll;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    max-width: 330px;
+  }
+}
+
+.active {
+  box-shadow: 0px 2px 9px 2px #00000083;
+}
+
+.image-box {
+  width: 90px;
+  height: 90px;
+  border-radius: 25px;
+  overflow: hidden;
+  transition: 0.3s box-shadow;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 2px 9px 2px #00000038;
+  }
+
+  img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+}

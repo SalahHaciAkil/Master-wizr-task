@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { useEffect } from "react";
+import apiMethods from "./api";
+import "./App.scss";
+import Container from "./components/Container";
+import PageTitle from "./components/PageTitle";
+import Slider from "./components/Slider";
+import ThumbnaiIcons from "./components/ThumbnaiIcons";
 
-function App() {
+const App = () => {
+  const [data, setData] = useState([]);
+  const [activeItemId, setActiveItemId] = useState("");
+
+  useEffect(() => {
+    apiMethods
+      .getData()
+      .then((data) => {
+        setActiveItemId(data[0].id);
+        setData(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
+  if (data.length === 0) return null; // we can add a spinner
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Container>
+        <PageTitle title="MASTER WIZR Modules" />
+        <ThumbnaiIcons
+          activeItemId={activeItemId}
+          setActiveItemId={setActiveItemId}
+          data={data}
+        />
+        <Slider
+          setActiveItemId={setActiveItemId}
+          activeItemId={activeItemId}
+          data={data}
+        />
+      </Container>
+    </>
   );
-}
+};
 
 export default App;
